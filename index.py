@@ -96,7 +96,7 @@ legal_rules = [
 legal_rules_text = "\n".join([f"{rule['law_id']} ({rule['category']}): {rule['law_text']}" for rule in legal_rules])
 
 # Initialize ChatGPT
-llm = ChatOpenAI(model="gpt-4-0613", temperature=0.7, api_key=openai_api_key)
+llm = ChatOpenAI(model="gpt-3.5-turbo-16k", temperature=0.7, api_key=openai_api_key)
 
 def extract_text(pdf_file):
     """Extract text from a PDF using pdfplumber."""
