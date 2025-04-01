@@ -1,4 +1,3 @@
-# Updated Legal Compliance Checker Using InLegalBERT + Reasoning via OpenRouter (Mistral)
 
 import json
 import os
@@ -15,11 +14,7 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 
-
-
 app = Flask(__name__)
-
-analysis_result = {}
 
 # Load InLegalBERT for embeddings
 embedding_model_id = "law-ai/InLegalBERT"
@@ -34,6 +29,7 @@ headers = {
     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
     "Content-Type": "application/json"
 }
+
 
 # Legal rules
 legal_rules = [
@@ -187,7 +183,7 @@ def extract_json(text):
 
 def check_clause_violation(clause):
     matched_rule, similarity = find_most_relevant_rule(clause)
-    reasoning_prompt = f"""
+    reasoning_prompt = f'''
     As an Indian legal expert, analyze the following contract clause in relation to the specified legal rule. Determine if the clause violates the rule and explain your reasoning.
 
     Clause: "{clause}"
@@ -200,7 +196,7 @@ def check_clause_violation(clause):
         "Violates": "YES or NO",
         "Reason": "<brief reasoning>"
     }}
-    """
+    '''
 
     response_text = call_llm(reasoning_prompt)
     if not response_text:
